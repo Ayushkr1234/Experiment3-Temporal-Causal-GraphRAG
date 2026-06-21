@@ -1,0 +1,4 @@
+Patchwork used PowerShell to execute malicious commands on government systems.
+The attackers exploited CVE-2017-11882 to gain access.
+After initial compromise, Patchwork established persistence using registry run keys.
+Data was exfiltrated to remote servers in March 2024.
