@@ -14,7 +14,7 @@ with open(
 
     data = json.load(f)
 
-triples = data["threat_intelligence"]["entity_relation_triples"]
+triples = data["entity_relation_triples"]
 
 with driver.session() as session:
 

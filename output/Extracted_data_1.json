@@ -1,174 +1,151 @@
-
 {
-  "threat_intelligence": {
-    "threat_actors": [
-      {
-        "name": "Patchwork",
-        "evidence_sentence": "Patchwork used PowerShell to execute malicious commands on government systems.",
-        "confidence": 0.95
-      },
-      {
-        "name": "The attackers",
-        "aliases": ["Patchwork"],
-        "evidence_sentence": "The attackers exploited CVE-2017-11882 to gain access.",
-        "confidence": 0.90
-      }
-    ],
-    "malware": [],
-    "tools": [
-      {
-        "name": "PowerShell",
-        "evidence_sentence": "Patchwork used PowerShell to execute malicious commands on government systems.",
-        "confidence": 0.95
-      },
-      {
-        "name": "registry run keys",
-        "description": "Used for persistence",
-        "evidence_sentence": "After initial compromise, Patchwork established persistence using registry run keys.",
-        "confidence": 0.90
-      }
-    ],
-    "vulnerabilities": [
-      {
-        "cve_id": "CVE-2017-11882",
-        "description": "Exploited to gain access.",
-        "evidence_sentence": "The attackers exploited CVE-2017-11882 to gain access.",
-        "confidence": 0.95
-      }
-    ],
-    "attack_tactics": [
-      {
-        "name": "Execution",
-        "description": "Execute malicious commands.",
-        "evidence_sentence": "Patchwork used PowerShell to execute malicious commands on government systems.",
-        "confidence": 0.90
-      },
-      {
-        "name": "Initial Access",
-        "description": "Gain access to systems.",
-        "evidence_sentence": "The attackers exploited CVE-2017-11882 to gain access.",
-        "confidence": 0.90
-      },
-      {
-        "name": "Persistence",
-        "description": "Establish persistence after initial compromise.",
-        "evidence_sentence": "After initial compromise, Patchwork established persistence using registry run keys.",
-        "confidence": 0.90
-      },
-      {
-        "name": "Exfiltration",
-        "description": "Data exfiltrated from systems.",
-        "evidence_sentence": "Data was exfiltrated to remote servers in March 2024.",
-        "confidence": 0.90
-      }
-    ],
-    "attack_techniques": [
-      {
-        "id": "T1059.001",
-        "name": "Command and Scripting Interpreter: PowerShell",
-        "evidence_sentence": "Patchwork used PowerShell to execute malicious commands on government systems.",
-        "confidence": 0.95
-      },
-      {
-        "id": "T1190",
-        "name": "Exploit Public-Facing Application",
-        "description": "Exploited CVE-2017-11882 to gain access.",
-        "evidence_sentence": "The attackers exploited CVE-2017-11882 to gain access.",
-        "confidence": 0.90
-      },
-      {
-        "id": "T1547.001",
-        "name": "Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder",
-        "evidence_sentence": "After initial compromise, Patchwork established persistence using registry run keys.",
-        "confidence": 0.95
-      }
-    ],
-    "targets": [
-      {
-        "name": "government systems",
-        "description": "Systems targeted for malicious commands and initial compromise.",
-        "evidence_sentence": "Patchwork used PowerShell to execute malicious commands on government systems.",
-        "confidence": 0.95
-      },
-      {
-        "name": "remote servers",
-        "description": "Destination for exfiltrated data.",
-        "evidence_sentence": "Data was exfiltrated to remote servers in March 2024.",
-        "confidence": 0.90
-      }
-    ],
-    "temporal_expressions": [
-      {
-        "expression": "March 2024",
-        "context": "Data exfiltration occurred in this month.",
-        "evidence_sentence": "Data was exfiltrated to remote servers in March 2024.",
-        "confidence": 0.95
-      }
-    ],
-    "entity_relation_triples": [
-      {
-        "subject": "Patchwork",
-        "predicate": "used",
-        "object": "PowerShell",
-        "evidence_sentence": "Patchwork used PowerShell to execute malicious commands on government systems.",
-        "confidence": 0.95
-      },
-      {
-        "subject": "PowerShell",
-        "predicate": "executed",
-        "object": "malicious commands",
-        "evidence_sentence": "Patchwork used PowerShell to execute malicious commands on government systems.",
-        "confidence": 0.90
-      },
-      {
-        "subject": "malicious commands",
-        "predicate": "targeted",
-        "object": "government systems",
-        "evidence_sentence": "Patchwork used PowerShell to execute malicious commands on government systems.",
-        "confidence": 0.90
-      },
-      {
-        "subject": "The attackers",
-        "predicate": "exploited",
-        "object": "CVE-2017-11882",
-        "evidence_sentence": "The attackers exploited CVE-2017-11882 to gain access.",
-        "confidence": 0.95
-      },
-      {
-        "subject": "CVE-2017-11882",
-        "predicate": "led_to",
-        "object": "initial access",
-        "evidence_sentence": "The attackers exploited CVE-2017-11882 to gain access.",
-        "confidence": 0.90
-      },
-      {
-        "subject": "Patchwork",
-        "predicate": "established",
-        "object": "persistence",
-        "evidence_sentence": "After initial compromise, Patchwork established persistence using registry run keys.",
-        "confidence": 0.95
-      },
-      {
-        "subject": "Patchwork",
-        "predicate": "used_for_persistence",
-        "object": "registry run keys",
-        "evidence_sentence": "After initial compromise, Patchwork established persistence using registry run keys.",
-        "confidence": 0.95
-      },
-      {
-        "subject": "Data",
-        "predicate": "exfiltrated_to",
-        "object": "remote servers",
-        "evidence_sentence": "Data was exfiltrated to remote servers in March 2024.",
-        "confidence": 0.95
-      },
-      {
-        "subject": "Exfiltration",
-        "predicate": "occurred_in",
-        "object": "March 2024",
-        "evidence_sentence": "Data was exfiltrated to remote servers in March 2024.",
-        "confidence": 0.95
-      }
-    ]
-  }
+  "threat_actors": [
+    {
+      "name": "Patchwork",
+      "evidence_sentence": "Patchwork used PowerShell to execute malicious commands on government systems.",
+      "confidence_score": 0.9
+    }
+  ],
+  "malware": [],
+  "tools": [
+    {
+      "name": "PowerShell",
+      "evidence_sentence": "Patchwork used PowerShell to execute malicious commands on government systems.",
+      "confidence_score": 0.9
+    }
+  ],
+  "vulnerabilities": [
+    {
+      "cve_id": "CVE-2017-11882",
+      "evidence_sentence": "The attackers exploited CVE-2017-11882 to gain access.",
+      "confidence_score": 0.9
+    }
+  ],
+  "attack_tactics": [
+    {
+      "name": "Execution",
+      "evidence_sentence": "Patchwork used PowerShell to execute malicious commands on government systems.",
+      "confidence_score": 0.9
+    },
+    {
+      "name": "Initial Access",
+      "evidence_sentence": "The attackers exploited CVE-2017-11882 to gain access.",
+      "confidence_score": 0.9
+    },
+    {
+      "name": "Persistence",
+      "evidence_sentence": "After initial compromise, Patchwork established persistence using registry run keys.",
+      "confidence_score": 0.9
+    },
+    {
+      "name": "Exfiltration",
+      "evidence_sentence": "Data was exfiltrated to remote servers in March 2024.",
+      "confidence_score": 0.9
+    }
+  ],
+  "attack_techniques": [
+    {
+      "technique_id": "T1059.001",
+      "technique_name": "Command and Scripting Interpreter: PowerShell",
+      "evidence_sentence": "Patchwork used PowerShell to execute malicious commands on government systems.",
+      "confidence_score": 0.9
+    },
+    {
+      "technique_id": "T1190",
+      "technique_name": "Exploit Public-Facing Application",
+      "evidence_sentence": "The attackers exploited CVE-2017-11882 to gain access.",
+      "confidence_score": 0.9
+    },
+    {
+      "technique_id": "T1547.001",
+      "technique_name": "Boot or Logon Autostart Execution: Registry Run Keys / Startup Folder",
+      "evidence_sentence": "After initial compromise, Patchwork established persistence using registry run keys.",
+      "confidence_score": 0.9
+    },
+    {
+      "technique_id": "T1041",
+      "technique_name": "Exfiltration Over C2 Channel",
+      "evidence_sentence": "Data was exfiltrated to remote servers in March 2024.",
+      "confidence_score": 0.9
+    }
+  ],
+  "targets": [
+    {
+      "name": "government systems",
+      "evidence_sentence": "Patchwork used PowerShell to execute malicious commands on government systems.",
+      "confidence_score": 0.9
+    }
+  ],
+  "temporal_expressions": [
+    {
+      "expression": "March 2024",
+      "evidence_sentence": "Data was exfiltrated to remote servers in March 2024.",
+      "confidence_score": 0.9
+    }
+  ],
+  "entity_relation_triples": [
+    {
+      "subject": "Patchwork",
+      "predicate": "USED",
+      "object": "PowerShell",
+      "evidence_sentence": "Patchwork used PowerShell to execute malicious commands on government systems.",
+      "confidence_score": 0.9
+    },
+    {
+      "subject": "PowerShell",
+      "predicate": "EXECUTED",
+      "object": "malicious commands",
+      "evidence_sentence": "Patchwork used PowerShell to execute malicious commands on government systems.",
+      "confidence_score": 0.9
+    },
+    {
+      "subject": "Patchwork",
+      "predicate": "TARGETED",
+      "object": "government systems",
+      "evidence_sentence": "Patchwork used PowerShell to execute malicious commands on government systems.",
+      "confidence_score": 0.9
+    },
+    {
+      "subject": "The attackers",
+      "predicate": "EXPLOITED",
+      "object": "CVE-2017-11882",
+      "evidence_sentence": "The attackers exploited CVE-2017-11882 to gain access.",
+      "confidence_score": 0.9
+    },
+    {
+      "subject": "CVE-2017-11882",
+      "predicate": "LED_TO",
+      "object": "gain access",
+      "evidence_sentence": "The attackers exploited CVE-2017-11882 to gain access.",
+      "confidence_score": 0.9
+    },
+    {
+      "subject": "Patchwork",
+      "predicate": "ESTABLISHED",
+      "object": "persistence",
+      "evidence_sentence": "After initial compromise, Patchwork established persistence using registry run keys.",
+      "confidence_score": 0.9
+    },
+    {
+      "subject": "Persistence",
+      "predicate": "VIA",
+      "object": "registry run keys",
+      "evidence_sentence": "After initial compromise, Patchwork established persistence using registry run keys.",
+      "confidence_score": 0.9
+    },
+    {
+      "subject": "Data",
+      "predicate": "EXFILTRATED_TO",
+      "object": "remote servers",
+      "evidence_sentence": "Data was exfiltrated to remote servers in March 2024.",
+      "confidence_score": 0.9
+    },
+    {
+      "subject": "Exfiltration",
+      "predicate": "OCCURRED_ON",
+      "object": "March 2024",
+      "evidence_sentence": "Data was exfiltrated to remote servers in March 2024.",
+      "confidence_score": 0.9
+    }
+  ]
 }
