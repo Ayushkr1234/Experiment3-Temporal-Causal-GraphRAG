@@ -1,188 +1,321 @@
-# Temporal-Causal GraphRAG Reasoning and Next-TTP Prediction for Cyber Threat Intelligence
+# Temporal-Causal GraphRAG for Cyber Threat Intelligence Prediction
 
-## Project Overview
+## Overview
 
-This project implements a Cyber Threat Intelligence (CTI) pipeline that combines Knowledge Graphs, Neo4j, Google Gemini, GraphRAG, and Markov Chain based prediction to analyze attack patterns and predict future attacker behavior.
+This project implements a Temporal-Causal GraphRAG framework for Cyber Threat Intelligence (CTI) analysis and attack prediction using the MITRE ATT&CK framework, Neo4j Knowledge Graphs, Graph Neural Networks, Knowledge Graph Embeddings, and Large Language Models.
 
-The objective is to extract threat intelligence from CTI reports, represent the information as a Knowledge Graph, and perform reasoning to predict likely future attack techniques (TTPs).
+The system extracts threat intelligence entities and relationships from CTI reports, constructs attack knowledge graphs, performs graph-based reasoning, and predicts potential future attacker actions using multiple machine learning and graph learning approaches.
+
+---
+
+## Objectives
+
+* Build a Cyber Threat Intelligence Knowledge Graph using MITRE ATT&CK data.
+* Extract entities and relationships from CTI reports using Gemini LLM.
+* Store and query attack knowledge in Neo4j.
+* Implement GraphRAG-based reasoning for attack prediction.
+* Evaluate Knowledge Graph Embedding models.
+* Generate graph representations using Graph Neural Networks.
+* Explore temporal attack sequence modeling.
 
 ---
 
 ## Technologies Used
 
+### Programming Language
+
 * Python 3.12
-* Neo4j Graph Database
-* Pandas
-* Google Gemini API
-* MITRE ATT&CK Dataset
-* GraphRAG
-* Markov Chain Model
-* Git & GitHub
+
+### Database
+
+* Neo4j Community Edition
+
+### Libraries
+
+* pandas
+* neo4j
+* google-generativeai
+* pykeen
+* torch
+* torch-geometric
+
+### Models Implemented
+
+* Markov Chain
+* GraphRAG + Gemini
+* TransE
+* RotatE
+* Relational Graph Convolutional Network (R-GCN)
+* Graph Attention Network (GAT)
+* Temporal Graph Neural Network (Simplified)
 
 ---
 
-## Dataset Used
+## Project Architecture
 
-### 1. Attackmitre.xlsx
+MITRE ATT&CK Dataset
 
-Contains:
+↓
 
-* APT Group Names
-* Software Techniques
-* Software IDs
-* References
+Knowledge Graph Construction
 
-Used to build the APT Knowledge Graph.
+↓
 
-### 2. MitreEnterprise.xlsx
+Neo4j Graph Database
 
-Contains MITRE ATT&CK entities such as:
+↓
 
-* Techniques
-* Threat Groups
-* Malware
-* Software
-* Descriptions
-* Examples
+CTI Report Ingestion
 
-Used as ATT&CK reference data.
+↓
 
----
+Gemini-based Entity & Relation Extraction
 
-## Project Workflow
+↓
 
-### Phase 1: APT Knowledge Graph Creation
+Attack Knowledge Graph
 
-The Attackmitre dataset was processed using Python and Pandas.
+↓
 
-Nodes Created:
+GraphRAG Retrieval
 
-* APT Groups
-* Techniques
+↓
 
-Relationships Created:
+Threat Prediction & Analysis
 
-* USES
+↓
 
-Example:
-
-APT30 → USES → T1059
-
-Results:
-
-* 76 APT Group Nodes
-* 164 Technique Nodes
-* 2402 USES Relationships
-
-Stored in Neo4j.
+Knowledge Graph Embeddings / Graph Neural Networks
 
 ---
 
-### Phase 2: CTI Report Processing
+## Dataset Information
 
-A sample CTI report was created and processed using Google Gemini.
+### MITRE ATT&CK Dataset
 
-Extracted Information:
+The MITRE ATT&CK dataset is used to create the primary cybersecurity knowledge graph.
 
-* Threat Actors
-* Tools
-* Vulnerabilities
-* ATT&CK Tactics
-* ATT&CK Techniques
-* Targets
-* Temporal Expressions
-* Entity Relationship Triples
-* Confidence Scores
+Statistics:
 
-Output generated:
+* Entities: 252
+* Relation Types: 12
+* Triples: 2415
 
-Extracted_data_1.json
+### Extracted CTI Graph
 
----
+Statistics:
 
-### Phase 3: Attack Knowledge Graph Creation
-
-The extracted JSON file was parsed and inserted into Neo4j.
-
-Nodes Created:
-
-* Threat Actors
-* Tools
-* Vulnerabilities
-* Targets
-* Time Entities
-
-Relationships Created:
-
-* USED
-* EXPLOITED
-* ESTABLISHED
-* EXFILTRATED_TO
-* OCCURRED_IN
-
-Results:
-
-* 13 Entity Nodes
-* 9 Relationships
+* Attack Graph Nodes: 15
+* Attack Graph Relationships: 13
 
 ---
 
-### Phase 4: GraphRAG Reasoning
+## Implemented Modules
 
-Graph data was retrieved from Neo4j and provided to Gemini as contextual information.
+### 1. CTI Extraction
 
-GraphRAG Workflow:
+File:
 
-Neo4j Graph → Retrieval → Gemini Reasoning → Predicted Next TTP
+```text
+extract_cti.py
+```
 
-Example Query:
+Functionality:
 
-"What is the likely next attack technique after PowerShell execution?"
+* Reads CTI reports.
+* Uses Gemini LLM to extract:
+
+  * Threat Actors
+  * Techniques
+  * Vulnerabilities
+  * Targets
+  * Temporal Expressions
+  * Entity Relationship Triples
+
+Output:
+
+```text
+output/Extracted_data_1.json
+```
+
+---
+
+### 2. Attack Knowledge Graph
+
+File:
+
+```text
+attack_kg.py
+```
+
+Functionality:
+
+* Imports extracted entities and relationships into Neo4j.
+* Creates attack graph nodes and edges.
+
+---
+
+### 3. GraphRAG
+
+File:
+
+```text
+graph_rag.py
+```
+
+Functionality:
+
+* Retrieves graph context from Neo4j.
+* Uses Gemini for reasoning over attack relationships.
+* Predicts likely next attacker actions.
 
 Example Prediction:
 
-* Likely Tactic: Discovery
-* Likely Technique: T1082 (System Information Discovery)
+* Tactic: Discovery
+* Technique: T1082 (System Information Discovery)
 
 ---
 
-### Phase 5: Next-TTP Prediction
+### 4. Markov Chain Model
 
-A Markov Chain model was implemented to predict the next attack tactic based on observed attack sequences.
+Functionality:
 
-Example:
+* Learns attack transitions.
+* Predicts likely next attack techniques.
 
-Execution → Persistence → Discovery
+Purpose:
 
-Given:
-
-Execution → Persistence
-
-Predicted:
-
-Discovery
+* Baseline attack prediction model.
 
 ---
 
-## Implemented Models
+### 5. Knowledge Graph Embedding Models
 
-### Implemented
+#### TransE
 
-* Markov Chain
-* LLM-only (Google Gemini)
-* GraphRAG
+Files:
 
-### Proposed / Future Work
+```text
+train_transe.py
+evaluate_transe.py
+```
 
-The following models were identified in the project specification but were not fully implemented due to time constraints:
+Results:
 
-* TransE
-* RotatE
-* GAT
-* R-GCN
-* Temporal GNN
+| Metric  | Value |
+| ------- | ----: |
+| Hits@1  | 0.000 |
+| Hits@3  | 0.022 |
+| MRR     | 0.037 |
+| Hits@10 | 0.093 |
 
-These models can be integrated in future versions to improve link prediction and temporal reasoning.
+---
+
+#### RotatE
+
+Files:
+
+```text
+train_rotate.py
+evaluate_rotate.py
+```
+
+Results:
+
+| Metric  | Value |
+| ------- | ----: |
+| Hits@1  | 0.049 |
+| Hits@3  | 0.087 |
+| MRR     | 0.102 |
+| Hits@10 | 0.181 |
+
+Observation:
+
+RotatE outperformed TransE across all evaluation metrics.
+
+---
+
+### 6. R-GCN
+
+Files:
+
+```text
+export_rgcn_data.py
+rgcn_model.py
+```
+
+Functionality:
+
+* Converts graph triples into graph neural network format.
+* Generates node embeddings.
+
+Output:
+
+```text
+rgcn_embeddings.csv
+```
+
+Embedding Shape:
+
+```text
+torch.Size([252, 32])
+```
+
+---
+
+### 7. GAT
+
+File:
+
+```text
+gat_model.py
+```
+
+Functionality:
+
+* Learns attention-based node representations.
+* Generates graph embeddings.
+
+Output:
+
+```text
+gat_embeddings.csv
+```
+
+Embedding Shape:
+
+```text
+torch.Size([252, 32])
+```
+
+---
+
+### 8. Temporal GNN
+
+Files:
+
+```text
+generate_temporal_data.py
+temporal_gnn.py
+```
+
+Functionality:
+
+* Creates temporal attack sequences.
+* Incorporates timestamp information into graph learning.
+* Demonstrates temporal attack representation.
+
+Output:
+
+```text
+temporal_triples.csv
+```
+
+Embedding Shape:
+
+```text
+torch.Size([252, 32])
+```
 
 ---
 
@@ -191,43 +324,97 @@ These models can be integrated in future versions to improve link prediction and
 ```text
 experiment3/
 │
-├── data/
-│   ├── Attackmitre.xlsx
-│   └── MitreEnterprise.xlsx
-│
-├── reports/
-│   └── report1.txt
-│
-├── output/
-│   └── Extracted_data_1.json
-│
-├── create_apt_nodes.py
-├── create_techniques.py
-├── extract_cti.py
 ├── attack_kg.py
+├── extract_cti.py
 ├── graph_rag.py
-├── markov_prediction.py
+├── export_triples.py
+│
+├── train_transe.py
+├── evaluate_transe.py
+│
+├── train_rotate.py
+├── evaluate_rotate.py
+│
+├── export_rgcn_data.py
+├── rgcn_model.py
+│
+├── gat_model.py
+│
+├── generate_temporal_data.py
+├── temporal_gnn.py
+│
+├── triples.tsv
+├── rgcn_triples.csv
+├── temporal_triples.csv
+│
+├── rgcn_embeddings.csv
+├── gat_embeddings.csv
+│
+├── transe_model/
+├── rotate_model/
+│
 └── README.md
 ```
 
-## Key Achievements
+---
 
-✔ Created an APT Knowledge Graph using MITRE ATT&CK data
+## How to Run
 
-✔ Extracted CTI entities and relationships using Google Gemini
+### Clone Repository
 
-✔ Generated Attack Knowledge Graph in Neo4j
+```bash
+git clone https://github.com/YOUR_USERNAME/Experiment3-Temporal-Causal-GraphRAG.git
+cd Experiment3-Temporal-Causal-GraphRAG
+```
 
-✔ Implemented GraphRAG-based reasoning
+### Create Virtual Environment
 
-✔ Implemented Markov Chain based Next-TTP prediction
+```bash
+python -m venv venv
+```
 
-✔ Stored all graph data inside Neo4j
+Activate:
 
-✔ Managed project using Git and GitHub
+Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+### Install Dependencies
+
+```bash
+pip install pandas
+pip install neo4j
+pip install google-generativeai
+pip install pykeen
+pip install torch
+pip install torch-geometric
+```
+
+---
+
+## Future Work
+
+* Temporal Graph Networks (TGN)
+* Dynamic Knowledge Graph Embeddings
+* Multi-hop Attack Path Prediction
+* Explainable Threat Intelligence Reasoning
+* Real-time CTI Stream Processing
+* Automated ATT&CK Technique Recommendation
 
 ---
 
 ## Conclusion
 
-This project demonstrates an end-to-end Cyber Threat Intelligence pipeline that integrates Knowledge Graphs, Neo4j, Large Language Models, and GraphRAG techniques for threat analysis and attack prediction. The system successfully extracts intelligence from CTI reports, builds graph representations, performs reasoning, and predicts future attack behavior.
+This project demonstrates an end-to-end Cyber Threat Intelligence pipeline integrating Knowledge Graphs, GraphRAG, Large Language Models, Knowledge Graph Embeddings, and Graph Neural Networks. The framework enables extraction, representation, reasoning, and prediction of cyber attack behaviors using ATT&CK-based threat intelligence knowledge.
+
+---
+
+## Author
+
+Ayush Kumar
+
+B.Tech Computer Science and Engineering
+
+SRM University AP
